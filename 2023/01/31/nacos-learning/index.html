@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>Nacos(1)-服务注册 | ThreeJ的个人博客</title>
+
+    <meta name="description" content="&lt;h1&gt;&lt;strong&gt;Nacos的注册中心（客户端）&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;在微服务的架构体系中，在目前来说我对注册中心的理解：作为&lt;strong&gt;存储服务与该服务地址的一个映射关系&lt;/strong&gt;的一个容器。&lt;/p&gt;
+&lt;h2 id=&#34;为什么要存储映射关系&#34;&gt;&lt;strong&gt;为什么要存储映射关系&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;微服务的理念是将一个大的服务尽量的拆分为最小的粒度，拆分成的每个小的服务只关注自己的某一个功能实现。">
+    <meta name="keywords" content="">
+
+    
+
+    <meta property="og:locale" content="zh-CN" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content= "Nacos(1)-服务注册 | ThreeJ的个人博客"  />
+    <meta property="og:description" content= "&lt;h1&gt;&lt;strong&gt;Nacos的注册中心（客户端）&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;在微服务的架构体系中，在目前来说我对注册中心的理解：作为&lt;strong&gt;存储服务与该服务地址的一个映射关系&lt;/strong&gt;的一个容器。&lt;/p&gt;
+&lt;h2 id=&#34;为什么要存储映射关系&#34;&gt;&lt;strong&gt;为什么要存储映射关系&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;微服务的理念是将一个大的服务尽量的拆分为最小的粒度，拆分成的每个小的服务只关注自己的某一个功能实现。" />
+    <meta property="og:url" content="http://example.com/2023/01/31/nacos-learning/index.html" />
+    <meta property="og:site_name" content="" />
+    <meta property="article:author" content="JiangJiaJie" />
+    <meta property="article:publisher" content="" />
+    <meta property="og:description" content="&lt;h1&gt;&lt;strong&gt;Nacos的注册中心（客户端）&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;在微服务的架构体系中，在目前来说我对注册中心的理解：作为&lt;strong&gt;存储服务与该服务地址的一个映射关系&lt;/strong&gt;的一个容器。&lt;/p&gt;
+&lt;h2 id=&#34;为什么要存储映射关系&#34;&gt;&lt;strong&gt;为什么要存储映射关系&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;微服务的理念是将一个大的服务尽量的拆分为最小的粒度，拆分成的每个小的服务只关注自己的某一个功能实现。" />
+    <meta name="twitter:title" content="Nacos(1)-服务注册 | ThreeJ的个人博客"/>
+    <meta name="twitter:description" content="&lt;h1&gt;&lt;strong&gt;Nacos的注册中心（客户端）&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;在微服务的架构体系中，在目前来说我对注册中心的理解：作为&lt;strong&gt;存储服务与该服务地址的一个映射关系&lt;/strong&gt;的一个容器。&lt;/p&gt;
+&lt;h2 id=&#34;为什么要存储映射关系&#34;&gt;&lt;strong&gt;为什么要存储映射关系&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;微服务的理念是将一个大的服务尽量的拆分为最小的粒度，拆分成的每个小的服务只关注自己的某一个功能实现。"/>
+    <script type="application/ld+json">
+        {
+            "description": "&lt;h1&gt;&lt;strong&gt;Nacos的注册中心（客户端）&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;在微服务的架构体系中，在目前来说我对注册中心的理解：作为&lt;strong&gt;存储服务与该服务地址的一个映射关系&lt;/strong&gt;的一个容器。&lt;/p&gt;
+&lt;h2 id=&#34;为什么要存储映射关系&#34;&gt;&lt;strong&gt;为什么要存储映射关系&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;微服务的理念是将一个大的服务尽量的拆分为最小的粒度，拆分成的每个小的服务只关注自己的某一个功能实现。",
+            "author": { "@type": "Person", "name": "JiangJiaJie" },
+            "@type": "BlogPosting",
+            "url": "http://example.com/2023/01/31/nacos-learning/index.html",
+            "publisher": {
+            "@type": "Organization",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "http://example.comundefined"
+            },
+            "name": "JiangJiaJie"
+            },
+            "headline": "Nacos(1)-服务注册 | ThreeJ的个人博客",
+            "datePublished": "2023-01-31T08:57:29.000Z",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://example.com/2023/01/31/nacos-learning/index.html"
+            },
+            "@context": "http://schema.org"
+        }
+    </script>
+
+
+
+
+    
+
+    
+
+    
+
+    
+    <link rel="icon" href="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/bitbug_favicon%20(3).ico">
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1654266144177.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1654266144177.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>ThreeJ的个人博客</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">首页</a>
+                
+                <a href="/archives">归档</a>
+                
+                <a href="/favorite">我的收藏</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/ThreeJ939">
+        <ion-icon name="logo-github"></ion-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">首页</a>
+                    
+                    <a href="/archives">归档</a>
+                    
+                    <a href="/favorite">我的收藏</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-clez4nort000ircvt0xct6rbg" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      Nacos(1)-服务注册
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2023-01-31T08:57:29.000Z" itemprop="datePublished">2023-01-31</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">源码分析</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nacos/" rel="tag">Nacos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/" rel="tag">注册中心</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/" rel="tag">配置中心</a></li></ul>
+            </div>
+            
+
+            
+            <div class="article-busuanzi">
+                <span id="busuanzi_value_page_pv">N</span> 人看过
+            </div>
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h1><strong>Nacos的注册中心（客户端）</strong></h1>
+<p>在微服务的架构体系中，在目前来说我对注册中心的理解：作为<strong>存储服务与该服务地址的一个映射关系</strong>的一个容器。</p>
+<h2 id="为什么要存储映射关系"><strong>为什么要存储映射关系</strong></h2>
+<p>微服务的理念是将一个大的服务尽量的拆分为最小的粒度，拆分成的每个小的服务只关注自己的某一个功能实现。<span id="more"></span>因为进行了拆分所以每个服务有了自己独立的服务地址（简单理解为IP加端口），某个需求的实现是需要多个服务之间合作来完成，服务与服务之间的调用最终是通过IP+端口+接口名称进行调用的，在没有注册中心这一理念的情况下，我们是需要把其它服务的地址写死在自己的服务中的，如果一个服务的IP发生变动，你就需要去修改其他服务对该服务的调用地址。</p>
+<p>当服务很多时这就是一个较大的工作量了，并且也不利于线上环境的更改。所以这样看来把服务与服务地址的映射关系单独抽离进行管理是迫切需要的。</p>
+<h2 id="注册中心的基本功能"><strong>注册中心的基本功能</strong></h2>
+<p>作为一个注册中心的核心功能就是维护服务与服务地址的映射关系。虽说核心是存储映射关系，但最终的重点却好似落在了如何去维护这个映射关系身上，以及如何让其它服务来感知这个映射列表的变化。而现在需要知道的是我们所说的服务可能不仅仅是一个服务实例，它可能是一个服务集群，在调用某个服务时实际上是选取某个服务实例进行调用的。</p>
+<p>所以作为注册中心应该包含的功能：①<strong>提供服务的注册</strong> ②<strong>服务的发现</strong> ③<strong>负载均衡</strong> ④<strong>服务健康检测</strong></p>
+<p>下面先从作为Nacos客户端的注册中心相关源码的分析：</p>
+<h3 id="引入服务注册"><strong>引入服务注册</strong></h3>
+<ol>
+<li>要成为Nacos的注册中心的客户端需要做的就是引入一下依赖</li>
+</ol>
+<pre><code class="language-java">&lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-alibaba-nacos-discovery&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>我这里使用的是<code>2021.0.1.0</code>版本，在更早的版本中Nacos对负载均衡的实现使用的是<strong>Ribbon</strong>，后面做负载均衡的分析的时候再进行分析。</p>
+<ol start="2">
+<li>在启动类上添加注解<code>@EnableDiscoveryClient</code>开启服务到Nacos服务端的自动注册，下面具体看一下该注解具体的功能</li>
+</ol>
+<pre><code>@Target(&#123;ElementType.TYPE&#125;)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
+@Import(&#123;EnableDiscoveryClientImportSelector.class&#125;)
+public @interface EnableDiscoveryClient &#123;
+  boolean autoRegister() default true;
+&#125;
+</code></pre>
+<p>貌似该注解做了两件事：<strong>引入EnableDiscoveryClientImportSelector类</strong>以及<strong>autoRegister()默认返回true</strong>。继续查看引入的EnableDiscoveryClientImportSelector类到底做了些什么</p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230217152116.png" alt=""></p>
+<p>从上图可知，因为autoRegister默认为true所以又会引入一个AutoServiceRegistrationConfiguration类</p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/20230217155057.png" alt=""></p>
+<p>该类会加载一些服务自动注册的一些默认属性，进入AutoServiceRegistrationProperties类可知，该类设置了<code>spring.cloud.service-registry.auto-registration</code>下的一些默认属性</p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/image-20230217155612767.png" alt="image-20230217155612767"></p>
+<p>其中主要影响服务注册的一个属性为<code>enabled</code>。具体的影响如下分析，在引入<code>spring-cloud-starter-alibaba-nacos-discovery</code>依赖后，在启动服务时会自动加载该jar包下的自动配置类。其中关于<strong>Nacos服务自动注册</strong>的主要逻辑在下图所标记的自动配置类中</p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/image-20230217161326264.png" alt="image-20230217161326264"></p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/image-20230217161729475.png" alt="image-20230217161729475"></p>
+<p>在加载该自动配置类时验证了<code>spring.cloud.service-registry.auto-registration.enabled</code>该属性，验证逻辑为：<strong>自动配置类生效的条件：①若配置文件中未配置该属性，则生效 ②若配置了该属性且该属性为true，则生效。</strong></p>
+<p><strong>通过以上的分析可知，其实在启动类下不设置<code>@EnableDiscoveryClient</code>注解，服务也会走自动注册的流程，但是当设置为<code>@EnableDiscoveryClient(autoRegister = false)</code>时，服务则不会进行自动注册。</strong></p>
+<h3 id="服务注册流程"><strong>服务注册流程</strong></h3>
+<p>分析Nacos客户端服务注册流程，主要就是对<code>spring-cloud-starter-alibaba-nacos-discovery</code>的jar下<code>spring.factories</code>中自动配置类的分析</p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/image-20230217173445809.png" alt="image-20230217173445809"></p>
+<p>话不多说先看第一个<code>NacosDiscoveryAutoConfiguration</code>自动配置类到底干了些啥。</p>
+<h4 id="1-NacosDiscoveryAutoConfiguration"><strong>1.NacosDiscoveryAutoConfiguration</strong></h4>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/image-20230217174310180.png" alt="image-20230217174310180"></p>
+<p>由上图可知，该类下注入了两个Bean，<code>NacosDiscoveryProperties</code>和<code>NacosServiceDiscovery</code>，<code>NacosDiscoveryProperties</code>通过其名称大概可知是加载Nacos注册中心的属性映射类，通过查看该属性映射类就可知Nacos的注册中心的配置属性大概有哪些。</p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/image-20230217175609605.png" alt="image-20230217175609605"></p>
+<p><code>NacosServiceDiscovery</code>这个类是关于服务及实例的增删查改以及对服务的订阅，换句话说就是有客户端主动向服务端发起的请求也有接收服务端推送的消息</p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/20230220105321.png" alt=""></p>
+<p>上图👆大概就是<code>NacosServiceDiscovery</code>这个类所涉及到的相关类，其中<strong>namingService</strong>与<strong>namingMaintainService</strong>是<strong>服务注册与发现的核心</strong>，主要是对于服务以及服务实例的一些操作，如对服务实例的注册、注销、查询以及对服务的增删查改与订阅。</p>
+<h4 id="2-NacosDiscoveryEndpointAutoConfiguration"><strong>2.NacosDiscoveryEndpointAutoConfiguration</strong></h4>
+<p>这个类的话，新增了一个<code>nacosdiscovery</code>的端点，用于获取该服务的一些配置信息以及该服务下的所有服务实例信息，如下图所示👇</p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/image-20230220141144219.png" alt="image-20230220141144219"></p>
+<p>除此之外，还自定义了一个<code>health</code>端点下的<code>HealthIndicator</code>健康指示器如下👇</p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/image-20230220143222898.png" alt="image-20230220143222898"></p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/image-20230220143706461.png" alt="image-20230220143706461"></p>
+<p>该健康指示器就是获取当前服务的一个健康状况（相对于Nacos服务端来说，当Nacos服务端与该服务之间的心跳发现该服务不能响应心跳时，则该服务的健康状态为<strong>DOWN</strong>）</p>
+<h4 id="3-NacosServiceRegistryAutoConfiguration"><strong>3.NacosServiceRegistryAutoConfiguration</strong></h4>
+<p>该自动配置类为Nacos服务注册的核心逻辑，先看看该类注入了哪些Bean</p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/image-20230220151009675.png" alt="image-20230220151009675"></p>
+<p>这些bean的大致功能如下</p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/image-20230220152815873.png" alt="image-20230220152815873"></p>
+<p>此处主要对<code>NacosAutoServiceRegistration</code>进行详细分析，该类的继承继承和实现关系如下👇</p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/image-20230221094748977.png" alt="image-20230221094748977"></p>
+<pre><code class="language-java">public class NacosAutoServiceRegistration extends AbstractAutoServiceRegistration&lt;Registration&gt; &#123;
+  private static final Logger log = LoggerFactory.getLogger(NacosAutoServiceRegistration.class);
+  private NacosRegistration registration;
+
+  public NacosAutoServiceRegistration(ServiceRegistry&lt;Registration&gt; serviceRegistry, AutoServiceRegistrationProperties autoServiceRegistrationProperties, NacosRegistration registration) &#123;
+    super(serviceRegistry, autoServiceRegistrationProperties);
+    this.registration = registration;
+  &#125;
+
+  /** @deprecated */
+  @Deprecated
+  public void setPort(int port) &#123;
+    this.getPort().set(port);
+  &#125;
+
+  protected NacosRegistration getRegistration() &#123;
+    if (this.registration.getPort() &lt; 0 &amp;&amp; this.getPort().get() &gt; 0) &#123;
+      this.registration.setPort(this.getPort().get());
+    &#125;
+
+    Assert.isTrue(this.registration.getPort() &gt; 0, &quot;service.port has not been set&quot;);
+    return this.registration;
+  &#125;
+
+  protected NacosRegistration getManagementRegistration() &#123;
+    return null;
+  &#125;
+
+  protected void register() &#123;
+    if (!this.registration.getNacosDiscoveryProperties().isRegisterEnabled()) &#123;
+      log.debug(&quot;Registration disabled.&quot;);
+    &#125; else &#123;
+      if (this.registration.getPort() &lt; 0) &#123;
+        this.registration.setPort(this.getPort().get());
+      &#125;
+
+      super.register();
+    &#125;
+  &#125;
+
+  protected void registerManagement() &#123;
+    if (this.registration.getNacosDiscoveryProperties().isRegisterEnabled()) &#123;
+      super.registerManagement();
+    &#125;
+  &#125;
+
+  protected Object getConfiguration() &#123;
+    return this.registration.getNacosDiscoveryProperties();
+  &#125;
+
+  protected boolean isEnabled() &#123;
+    return this.registration.getNacosDiscoveryProperties().isRegisterEnabled();
+  &#125;
+
+  protected String getAppName() &#123;
+    String appName = this.registration.getNacosDiscoveryProperties().getService();
+    return StringUtils.isEmpty(appName) ? super.getAppName() : appName;
+  &#125;
+
+  @EventListener
+  public void onNacosDiscoveryInfoChangedEvent(NacosDiscoveryInfoChangedEvent event) &#123;
+    this.restart();
+  &#125;
+
+  private void restart() &#123;
+    this.stop();
+    this.start();
+  &#125;
+&#125;
+</code></pre>
+<p>通过查看此<code>NacosAutoServiceRegistration</code>类的源码，好像并未找到服务进行自动注册的一个入口和触发条件，莫非是在父类<code>AbstractAutoServiceRegistration</code>中。</p>
+<pre><code class="language-java">public abstract class AbstractAutoServiceRegistration&lt;R extends Registration&gt; implements AutoServiceRegistration, ApplicationContextAware, ApplicationListener&lt;WebServerInitializedEvent&gt; &#123;
+  private static final Log logger = LogFactory.getLog(AbstractAutoServiceRegistration.class);
+  private final ServiceRegistry&lt;R&gt; serviceRegistry;
+  private boolean autoStartup = true;
+  private AtomicBoolean running = new AtomicBoolean(false);
+  private int order = 0;
+  private ApplicationContext context;
+  private Environment environment;
+  private AtomicInteger port = new AtomicInteger(0);
+  private AutoServiceRegistrationProperties properties;
+
+  /** @deprecated */
+  @Deprecated
+  protected AbstractAutoServiceRegistration(ServiceRegistry&lt;R&gt; serviceRegistry) &#123;
+    this.serviceRegistry = serviceRegistry;
+  &#125;
+
+  protected AbstractAutoServiceRegistration(ServiceRegistry&lt;R&gt; serviceRegistry, AutoServiceRegistrationProperties properties) &#123;
+    this.serviceRegistry = serviceRegistry;
+    this.properties = properties;
+  &#125;
+
+  protected ApplicationContext getContext() &#123;
+    return this.context;
+  &#125;
+
+  public void onApplicationEvent(WebServerInitializedEvent event) &#123;
+    this.bind(event);
+  &#125;
+
+  /** @deprecated */
+  @Deprecated
+  public void bind(WebServerInitializedEvent event) &#123;
+    ApplicationContext context = event.getApplicationContext();
+    if (!(context instanceof ConfigurableWebServerApplicationContext) || !&quot;management&quot;.equals(((ConfigurableWebServerApplicationContext)context).getServerNamespace())) &#123;
+      this.port.compareAndSet(0, event.getWebServer().getPort());
+      this.start();
+    &#125;
+  &#125;
+
+  public void setApplicationContext(ApplicationContext applicationContext) throws BeansException &#123;
+    this.context = applicationContext;
+    this.environment = this.context.getEnvironment();
+  &#125;
+    
+.....
+    
+  public void start() &#123;
+    if (!this.isEnabled()) &#123;
+      if (logger.isDebugEnabled()) &#123;
+        logger.debug(&quot;Discovery Lifecycle disabled. Not starting&quot;);
+      &#125;
+
+    &#125; else &#123;
+      if (!this.running.get()) &#123;
+        this.context.publishEvent(new InstancePreRegisteredEvent(this, this.getRegistration()));
+        this.register();
+        if (this.shouldRegisterManagement()) &#123;
+          this.registerManagement();
+        &#125;
+
+        this.context.publishEvent(new InstanceRegisteredEvent(this, this.getConfiguration()));
+        this.running.compareAndSet(false, true);
+      &#125;
+
+    &#125;
+  &#125;
+
+.....
+&#125;
+</code></pre>
+<p>在<code>AbstractAutoServiceRegistration</code>抽象类中实现<code>ApplicationListener&lt;WebServerInitializedEvent&gt;</code>这个接口。由此可知，在web服务器初始化完成时发布的<code>WebServerInitializedEvent</code>事件，会触发此处的监听事件，由此开始执行服务的自动注册流程。大致的执行流程如下所示👇</p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/image-20230221154716950.png" alt="image-20230221154716950"></p>
+<p>在执行完上述流程后就可以在Nacos服务端的管理页面上看见已经自动注册完的服务的信息了</p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/image-20230221161057418.png" alt="image-20230221161057418"></p>
+<h3 id="小结"><strong>小结</strong></h3>
+<p>这处分析的源码仅仅是Nacos客户端服务注册相关的源码，总结服务注册的流程大致就为两点：①调用Nacos服务端提供的注册接口，提供的参数主要包含此服务的服务名、IP地址、端口等等。②定时发送心跳</p>
+<p>完整的服务注册应该结合Nacos服务端的源码进行分析。</p>
+<p>在服务注册流程中的客户端发送的心跳的作用是什么？是否与服务的健康检测有关？</p>
+<p>在触发<code>WebServerInitializedEvent</code>事件的监听事件后，进入服务注册流程前有一个判断条件，此判断条件的目的是什么？</p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/image-20230221171907323.png" alt="image-20230221171907323"></p>
+<p>这些坑后续在看看源码来补上。</p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+  <div class="article-copyright hairline">
+    <p>
+      本作品采用  <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议 (CC BY-NC-ND 4.0)</a> 进行许可。
+    </p>
+  </div>
+  
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/2023/02/21/nacos-discovery/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          Nacos(2)-服务发现
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/01/11/blog-building/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">记录一下使用github搭建个人博客网站</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=Nacos(1)-服务注册 - ThreeJ的个人博客&url=http%3A%2F%2Fexample.com%2F2023%2F01%2F31%2Fnacos-learning%2F">
+            <ion-icon name="logo-twitter"></ion-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=Nacos(1)-服务注册 - ThreeJ的个人博客&u=http%3A%2F%2Fexample.com%2F2023%2F01%2F31%2Fnacos-learning%2F">
+            <ion-icon name="logo-facebook"></ion-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=Nacos(1)-服务注册 - ThreeJ的个人博客&url=http://example.com/2023/01/31/nacos-learning/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments">
+    <div class="giscus"></div>
+</section>
+<script src="https://giscus.app/client.js"
+    data-repo="ThreeJ939/threeJ939.github.io"
+    data-repo-id="R_kgDOIrljEg"
+    data-category="General"
+    data-category-id="DIC_kwDOIrljEs4CThVw"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">源码分析</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nacos/" rel="tag">Nacos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/giscus/" rel="tag">giscus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/" rel="tag">注册中心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/" rel="tag">配置中心</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/2023/03/08/nacos-3-loadbalancer/">Nacos(3)-负载均衡器</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/21/nacos-discovery/">Nacos(2)-服务发现</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/31/nacos-learning/">Nacos(1)-服务注册</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/11/blog-building/">记录一下使用github搭建个人博客网站</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            ThreeJ的个人博客 &copy; 2023<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+<script type="module" src="https://unpkg.com/ionicons@6.0.2/dist/ionicons/ionicons.esm.js"></script>
+
+
+
+
+
+
+<script src="/dist/build.js?1654266144177.js"></script>
+
+
+<script src="/dist/custom.js?1654266144177.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

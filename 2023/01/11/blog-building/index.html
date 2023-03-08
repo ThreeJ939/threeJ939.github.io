@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>记录一下使用github搭建个人博客网站 | ThreeJ的个人博客</title>
+
+    <meta name="description" content="&lt;h1&gt;&lt;strong&gt;前言&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;临近过年，手上也没有什么新的项目，闲来无事就想着搭一个博客网站来玩玩。其实这也不是我第一次搭了，说多了都是泪😂，都是搭起来的时侯写两篇，然后服务器就放起吃灰，钱也花了，效果还没到达。最终还是决定要白嫖~~~~&lt;/p&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    <meta property="og:locale" content="zh-CN" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content= "记录一下使用github搭建个人博客网站 | ThreeJ的个人博客"  />
+    <meta property="og:description" content= "&lt;h1&gt;&lt;strong&gt;前言&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;临近过年，手上也没有什么新的项目，闲来无事就想着搭一个博客网站来玩玩。其实这也不是我第一次搭了，说多了都是泪😂，都是搭起来的时侯写两篇，然后服务器就放起吃灰，钱也花了，效果还没到达。最终还是决定要白嫖~~~~&lt;/p&gt;" />
+    <meta property="og:url" content="http://example.com/2023/01/11/blog-building/index.html" />
+    <meta property="og:site_name" content="" />
+    <meta property="article:author" content="JiangJiaJie" />
+    <meta property="article:publisher" content="" />
+    <meta property="og:description" content="&lt;h1&gt;&lt;strong&gt;前言&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;临近过年，手上也没有什么新的项目，闲来无事就想着搭一个博客网站来玩玩。其实这也不是我第一次搭了，说多了都是泪😂，都是搭起来的时侯写两篇，然后服务器就放起吃灰，钱也花了，效果还没到达。最终还是决定要白嫖~~~~&lt;/p&gt;" />
+    <meta name="twitter:title" content="记录一下使用github搭建个人博客网站 | ThreeJ的个人博客"/>
+    <meta name="twitter:description" content="&lt;h1&gt;&lt;strong&gt;前言&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;临近过年，手上也没有什么新的项目，闲来无事就想着搭一个博客网站来玩玩。其实这也不是我第一次搭了，说多了都是泪😂，都是搭起来的时侯写两篇，然后服务器就放起吃灰，钱也花了，效果还没到达。最终还是决定要白嫖~~~~&lt;/p&gt;"/>
+    <script type="application/ld+json">
+        {
+            "description": "&lt;h1&gt;&lt;strong&gt;前言&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;临近过年，手上也没有什么新的项目，闲来无事就想着搭一个博客网站来玩玩。其实这也不是我第一次搭了，说多了都是泪😂，都是搭起来的时侯写两篇，然后服务器就放起吃灰，钱也花了，效果还没到达。最终还是决定要白嫖~~~~&lt;/p&gt;",
+            "author": { "@type": "Person", "name": "JiangJiaJie" },
+            "@type": "BlogPosting",
+            "url": "http://example.com/2023/01/11/blog-building/index.html",
+            "publisher": {
+            "@type": "Organization",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "http://example.comundefined"
+            },
+            "name": "JiangJiaJie"
+            },
+            "headline": "记录一下使用github搭建个人博客网站 | ThreeJ的个人博客",
+            "datePublished": "2023-01-11T07:15:01.000Z",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://example.com/2023/01/11/blog-building/index.html"
+            },
+            "@context": "http://schema.org"
+        }
+    </script>
+
+
+
+
+    
+
+    
+
+    
+
+    
+    <link rel="icon" href="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/bitbug_favicon%20(3).ico">
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1654266144177.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1654266144177.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>ThreeJ的个人博客</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">首页</a>
+                
+                <a href="/archives">归档</a>
+                
+                <a href="/favorite">我的收藏</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/ThreeJ939">
+        <ion-icon name="logo-github"></ion-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">首页</a>
+                    
+                    <a href="/archives">归档</a>
+                    
+                    <a href="/favorite">我的收藏</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-clez4norj0001rcvth8hcbhw0" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      记录一下使用github搭建个人博客网站
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2023-01-11T07:15:01.000Z" itemprop="datePublished">2023-01-11</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/giscus/" rel="tag">giscus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+            </div>
+            
+
+            
+            <div class="article-busuanzi">
+                <span id="busuanzi_value_page_pv">N</span> 人看过
+            </div>
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h1><strong>前言</strong></h1>
+<p>临近过年，手上也没有什么新的项目，闲来无事就想着搭一个博客网站来玩玩。其实这也不是我第一次搭了，说多了都是泪😂，都是搭起来的时侯写两篇，然后服务器就放起吃灰，钱也花了，效果还没到达。最终还是决定要白嫖~~~~</p>
+<span id="more"></span>
+<h1><strong>准备工作</strong></h1>
+<p>我对博客网站的搭建就仨要求：<strong>①搭建简单 ②免费 ③可扩展</strong>。</p>
+<p>满足以上三个要求的可选方案有很多，但是我最终选用 <strong>github</strong> +  <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/"><strong>hexo</strong></a> 的方式搭一个静态的blog网站。目前在我看来它俩最大的优点就是都可以白嫖，写一篇文章你就要手动提交一次到github上，当然你也可以一次提交几篇，如果你是生产队的牛的话~~~ ~ 只要不是频繁的提交、修改勉强能接受吧。</p>
+<p><strong>github</strong>大家应该都不陌生，<strong>hexo</strong>的话在我看来就是一个帮你搭建一个静态博客页面的脚手架。你说hexo咋安装？客官麻烦出门左转找度娘~~~~</p>
+<h2 id="图片插入"><strong>图片插入</strong></h2>
+<p>在写文章的过程中，图片的插入应该是很频繁的事情，怎么能让发布在网上的文章中的图片能显示出来。有两种方案摆在我面前：</p>
+<p><strong>①将图片存在hexo的资源文件夹下，文章中使用相对路径来访问这些图片。</strong><br>
+<img src="images/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230113111824.png" alt=""></p>
+<h3 id="出现问题"><strong>出现问题</strong></h3>
+<p>但是值得注意的是，使用该方式引入图片会导致一个问题，在首页能看见上图☝️，但是在点击进入文章详情后上图却不能显示。当时我大概猜想了一下<strong>可能是文章的存储的路径发生了变化，也就是说首页看见的文章和进入文章详情看见的文章可能并不是同一篇文章</strong>（虽然文章内容一致，但实际存储路径不一致)不然不会存在图片在另一边显示不正确的问题。</p>
+<h3 id="原因"><strong>原因</strong></h3>
+<p>如何验证以上猜想，那就要去查看一下通过执行<strong>hexo</strong>一键部署命令<code>hexo deploy</code>后生成的静态页面文件结构是怎样的了，通过查看上传到gitHub仓库的页面文件<strong>见下图</strong>👇</p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230113115359.png" alt=""></p>
+<h3 id="解决"><strong>解决</strong></h3>
+<p>好像与我所猜想的差不多~~~~ 那么问题来了通过<code>![](images/image.jpg)</code>的方式以相对路径在文章中引入图片总有一个地方会出现加载不出来图片的情况​怎么​处理😬，​当然这种情况hexo的作者肯定是考虑到了<strong>见下图</strong>👇</p>
+<img src="/2023/01/11/blog-building/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230116093719.png" class="" title="This is an example image">
+<p>使用这种方式就解决了图片不能同时出现在文章和主页以及归档页中的问题，但使用这种方式你得去<code>_config.yml</code>中把<code>post_asset_folder</code> 选项设为 <code>true</code>,目的是在你使用<code>hexo new [loyout] &lt;title&gt;</code>创建文章时同时在该目录下创建一个同名的资源文件夹，你把你的图片放在该文件夹下你才能用上述方式插入图片。我觉得着使用这种方式虽然解决了问题，但是无疑也是对使用Markdown语法写文章的一种侵入。后续作者可能也觉得这种解决方式不太妥当，也给出了新的解决方案<strong>见下图</strong>👇</p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230116100726.png" alt=""></p>
+<p><strong>②使用图床的方式引入图片</strong></p>
+<p>这种方式就是<strong>将你要展示的图片上传到你的资源服务器上，由服务器返回一个资源对应的url</strong>，你就可以使用Markdown的标准语法来插入图片。这也是我较推荐的一种方式，因为你也可以将github作为你的图床，这就意味这又可以白嫖😆~~~~这里强烈推荐一款图床插件<a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo">PicGo</a>再配合<a target="_blank" rel="noopener" href="https://www.typoraio.cn/">Typora</a>使用，当你要在文章中插入图片时简直不要太舒服，孩子用了都说好。</p>
+<h2 id="Hexo主题"><strong>Hexo主题</strong></h2>
+<p>hexo提供的主题也是非常丰富，当然这也非常感谢那些提供精美主题的开源作者，我一眼就相中了一款名为<a target="_blank" rel="noopener" href="https://linhong.me/">Aomori</a>的主题，也许是作者希望使用者多关注关注他写的代码，提供的文档不是太全，算一个小坑吧。但也不得不说是一个很棒的主题。</p>
+<p><img src="https://raw.githubusercontent.com/ThreeJ939/blog-imgs/main/image-20230116105541550.png" alt="image-20230116105541550"></p>
+<h2 id="评论区"><strong>评论区</strong></h2>
+<p>评论区应该是一个博客锦上添花功能吧，为什么我说<a target="_blank" rel="noopener" href="https://linhong.me/">Aomori</a>是一个很棒的主题呢，以为它还集成了一些评论插件的功能，我选用的是<a target="_blank" rel="noopener" href="https://giscus.app/zh-CN">Giscus</a>作为我的评论系统，值得留意的是这个评论系统是由<a target="_blank" rel="noopener" href="https://docs.github.com/en/discussions">GitHub Discussions</a>驱动的，它居然把github提供的项目的评论区功能给单独抽离出来使用，非常佩服Giscus的作者👍。gitHub！！！我哭死😭，为我们这些白嫖个人博客网站的用户考虑的多周到呀😏</p>
+<h1><strong>结束</strong></h1>
+<p>到此为止一个基于github搭建的个人博客网站就正式搭建完成，目前该网站还未提交给搜索引擎收录，知道自己菜，文章没啥营养，但作为技术菜鸟也有自己的理想，后续会发布一些技术相关的文章，算是一点一点记录一下自己的足迹。</p>
+<p>勿笑之，共勉之。</p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+  <div class="article-copyright hairline">
+    <p>
+      本作品采用  <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议 (CC BY-NC-ND 4.0)</a> 进行许可。
+    </p>
+  </div>
+  
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/2023/01/31/nacos-learning/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          Nacos(1)-服务注册
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=记录一下使用github搭建个人博客网站 - ThreeJ的个人博客&url=http%3A%2F%2Fexample.com%2F2023%2F01%2F11%2Fblog-building%2F">
+            <ion-icon name="logo-twitter"></ion-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=记录一下使用github搭建个人博客网站 - ThreeJ的个人博客&u=http%3A%2F%2Fexample.com%2F2023%2F01%2F11%2Fblog-building%2F">
+            <ion-icon name="logo-facebook"></ion-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=记录一下使用github搭建个人博客网站 - ThreeJ的个人博客&url=http://example.com/2023/01/11/blog-building/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments">
+    <div class="giscus"></div>
+</section>
+<script src="https://giscus.app/client.js"
+    data-repo="ThreeJ939/threeJ939.github.io"
+    data-repo-id="R_kgDOIrljEg"
+    data-category="General"
+    data-category-id="DIC_kwDOIrljEs4CThVw"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">源码分析</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nacos/" rel="tag">Nacos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/giscus/" rel="tag">giscus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/" rel="tag">注册中心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/" rel="tag">配置中心</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/2023/03/08/nacos-3-loadbalancer/">Nacos(3)-负载均衡器</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/21/nacos-discovery/">Nacos(2)-服务发现</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/31/nacos-learning/">Nacos(1)-服务注册</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/11/blog-building/">记录一下使用github搭建个人博客网站</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            ThreeJ的个人博客 &copy; 2023<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+<script type="module" src="https://unpkg.com/ionicons@6.0.2/dist/ionicons/ionicons.esm.js"></script>
+
+
+
+
+
+
+<script src="/dist/build.js?1654266144177.js"></script>
+
+
+<script src="/dist/custom.js?1654266144177.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
